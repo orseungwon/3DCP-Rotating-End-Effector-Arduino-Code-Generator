@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>콘크리트 3D 프린터 코드 생성기</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>콘크리트 3D 프린터</h1>
+            <p class="subtitle">아두이노 코드 생성기</p>
+        </header>
+
+        <main>
+            <div class="top-section">
+                <div class="settings-panel">
+                    <h2>⚙️ 설정</h2>
+                    
+                    <div class="setting-group">
+                        <label for="zAxisTime">Z축 이동 시간 (ms)</label>
+                        <input type="number" id="zAxisTime" value="2000" min="0">
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="stepDelay">스텝 딜레이 (μs)</label>
+                        <input type="number" id="stepDelay" value="150" min="1">
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="jogDir">JOG 방향</label>
+                        <select id="jogDir">
+                            <option value="3">CCW (반시계)</option>
+                            <option value="2">CW (시계)</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="jogSteps">JOG 스텝</label>
+                        <input type="number" id="jogSteps" value="8000" min="0">
+                    </div>
+                </div>
+
+                <div class="preview-panel">
+                    <h2>📐 경로 미리보기</h2>
+                    <div class="canvas-container">
+                        <canvas id="previewCanvas" width="400" height="400"></canvas>
+                    </div>
+                    <div class="preview-info">
+                        <span class="legend start">● 시작점</span>
+                        <span class="legend end">● 끝점</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-section">
+                <h2>📝 명령어 입력</h2>
+                <div class="command-help">
+                    <p>한 줄에 하나씩 입력하세요:</p>
+                    <ul>
+                        <li><code>1 시간</code> — LINEAR 이동 (예: <code>1 3000</code> → 3초 직선 이동)</li>
+                        <li><code>2 시간 스텝</code> — CW 회전 (예: <code>2 3000 8000</code> → 3초 동안 90° 시계방향)</li>
+                        <li><code>3 시간 스텝</code> — CCW 회전 (예: <code>3 3000 8000</code> → 3초 동안 90° 반시계방향)</li>
+                    </ul>
+                    <p class="note">※ 8000 스텝 = 90° / 회전 시간이 0이면 기본 스텝 딜레이 사용</p>
+                </div>
+                <textarea id="commandInput" placeholder="1 3000
+3 3000 8000
+1 3000
+3 3000 8000
+1 3000
+3 3000 8000
+1 3000
+3 3000 8000">1 3000
+3 3000 8000
+1 3000
+3 3000 8000
+1 3000
+3 3000 8000
+1 3000
+3 3000 8000</textarea>
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+
+            <div class="button-section">
+                <button id="previewBtn" class="btn btn-preview">미리보기</button>
+                <button id="generateBtn" class="btn btn-generate">코드 생성</button>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <h2>💻 생성된 코드</h2>
+                <div class="code-header">
+                    <span>concrete_printer.ino</span>
+                    <button id="copyBtn" class="btn-copy">복사</button>
+                </div>
+                <pre id="codeOutput"><code></code></pre>
+            </div>
+        </main>
+
+        <footer>
+            <p>콘크리트 3D 프린터 제어용 아두이노 코드 생성기</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
