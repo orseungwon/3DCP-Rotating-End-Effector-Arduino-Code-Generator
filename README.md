@@ -40,7 +40,7 @@ https://orseungwon.github.io/3DCP-Rotating-End-Effector-Arduino-Code-Generator/ 
 한 줄에 하나씩 입력:
 
 ```
-1 시간           → LINEAR (직선 이동)
+1 시간               → LINEAR (직선 이동)
 2 시간 스텝      → CW (시계방향 회전)
 3 시간 스텝      → CCW (반시계방향 회전)
 ```
