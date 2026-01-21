@@ -11,7 +11,7 @@
 
 1. Arduino IDE 실행
 2. `스케치` → `라이브러리 포함하기` → `라이브러리 관리...` 클릭
-3. 검색창에 `LiquidCrystal I2C` 입력
+3. 검색창에 `LiquidCrystal` 입력
 4. `LiquidCrystal` 설치
 
 <img width="2933" height="1747" alt="image" src="https://github.com/user-attachments/assets/e3a79702-3ac3-48aa-8d4c-585c7f7eb465" />
