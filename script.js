@@ -701,19 +701,16 @@ bool updateLinear(unsigned long nowMs) {
 
 // 회전 동작 업데이트
 bool updateRotate(unsigned long nowUs) {
-  // 목표 스텝에 도달했으면 완료
   if (rotateStepCounter >= targetRotateSteps) return true;
 
-  // 스텝 신호 전송 타이밍 체크
   if (nowUs - lastStepTimeUs >= currentRotateDelayUs * 2) {
     lastStepTimeUs = nowUs;
 
-    // 스텝 펄스 생성
-    digitalWrite(PIN_STEP, HIGH);
+    PORTG |=  (1 << PG5);                  // 핀 4 HIGH
     delayMicroseconds(currentRotateDelayUs);
-    digitalWrite(PIN_STEP, LOW);
+    PORTG &= ~(1 << PG5);                  // 핀 4 LOW
 
-    rotateStepCounter++;  // 스텝 카운터 증가
+    rotateStepCounter++;
   }
   return false;
 }
